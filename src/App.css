@@ -13,7 +13,6 @@ body {
   display: flex;
   align-items: center;
   height: 100vh;
-
 }
 .titleApp {
   text-transform: uppercase;
@@ -138,4 +137,113 @@ input:checked ~ label{
 .isCorrect.true {
   background-color: green;
 
+}
+@media only screen and (max-width: 844px) {
+  body {
+    display: block;
+  }
+.Container {
+  font-size: 14px;
+  flex-direction: column;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.titleApp {
+  text-align: center;
+  width: 100%;
+}
+.donate {
+  text-transform: uppercase;
+  padding: 5px;
+  letter-spacing: 1px;
+  margin: 4px 0;
+}
+.donate span {
+  background-color: green;
+  color: #ffffff;
+  padding: 6px;
+}
+.btnSubmit {
+  border: none;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 14px;
+  min-width:300px;
+  transition: all 0.2s ease-in-out;
+  background-color: #2e2e2e;
+  color: #ffffff;
+  letter-spacing:1px;
+  cursor: pointer;
+  width: max-content;
+  position:sticky;
+  bottom: 10px;
+}
+.btnSubmit:hover {
+  background-color: green;
+}
+.Question {
+  margin-top: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+  overflow-y: scroll;
+}
+.Question .item {
+  padding: 0;
+  width: 100%;
+
+}
+.Question .item .answer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.Question .item .title {
+  font-weight: 500;
+  font-size: 18px;
+  padding-right: 50px;
+  padding-left: 10px;
+}
+.Question .item .answer .answerItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+}
+.Question .item .answer .answerItem:hover {
+  background-color: #f7f8f9;
+}
+.Question .item .answer .answerItem input[type="radio"] {
+  display: none;
+}
+input:checked ~ label{
+  transition: all 0.2s linear;
+  background-color: #2e2e2e;
+  color: #ffffff;
+}
+.Question .item .answer .answerItem label {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.Question .item .answer .answerItem.show > label{
+  background-color: green !important;
+  color: #ffffff;
+  pointer-events:none;
+}
+.Question .item .answer .answerItem.hide{
+  pointer-events: none;
+}
+.Question .item .answer .answerItem.hide input:checked ~ label{
+  transition: all 0.2s linear;
+  background-color: red;
+  color: #ffffff;
+  
+}
 }

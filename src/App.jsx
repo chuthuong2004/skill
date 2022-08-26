@@ -23,6 +23,7 @@ function App() {
   const questionRef = useRef();
   const scrollTop = () => {
     questionRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const handleSubmit = () => {
     submitted && setQuestions(mixedData(questions));
