@@ -1,9 +1,7 @@
 import "./App.css";
-import Item from "./Iten/Item";
+import Item from "./Item/Item";
 import { data } from "./data";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 const getShuffledArr = (arr) => {
   const newArr = arr.slice();
   for (let i = newArr.length - 1; i > 0; i--) {
