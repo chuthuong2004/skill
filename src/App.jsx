@@ -19,16 +19,29 @@ const mixedData = (arr) => {
 };
 function App() {
   const [questions, setQuestions] = useState(mixedData(data));
+  const [dataSearch, setDataSearch] = useState(questions);
   const [submitted, setSubmitted] = useState(false);
+  const [search, setSearch] = useState("");
   const questionRef = useRef();
   const scrollTop = () => {
     questionRef.current.scrollTo({ top: 0, behavior: "smooth" });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const handleSubmit = () => {
-    submitted && setQuestions(mixedData(questions));
+    submitted &&
+      setQuestions(mixedData(questions)) &&
+      setDataSearch(mixedData(questions));
     submitted && scrollTop();
     setSubmitted(!submitted);
+  };
+  const handleSearchChange = (e) => {
+    if (submitted) {
+      const listNew = questions.filter((item) =>
+        item.title.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setSearch(e.target.value);
+      setDataSearch(listNew);
+    }
   };
   return (
     <div className="Container">
@@ -36,8 +49,16 @@ function App() {
       <div className="donate">
         Donate me <span>Momo: 0333729170</span>
       </div>
+      <div className="search">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => handleSearchChange(e)}
+          placeholder="Bấm submit rồi hẳn search nhé mấy huynh đài"
+        />
+      </div>
       <div className="Question" ref={questionRef}>
-        {questions.map((answer, index) => (
+        {dataSearch.map((answer, index) => (
           <div key={answer.id} className="item">
             <h3 className="title">
               <strong>Câu {index + 1}:</strong> {answer.title}
