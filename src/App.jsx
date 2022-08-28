@@ -1,7 +1,7 @@
 import "./App.css";
 import Item from "./Item/Item";
 import { data } from "./data";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 const getShuffledArr = (arr) => {
   const newArr = arr.slice();
   for (let i = newArr.length - 1; i > 0; i--) {
@@ -48,6 +48,31 @@ function removeVietnameseTones(str) {
   );
   return str;
 }
+const CloseIcon = ({ width = "2rem", height = "2rem", className }) => (
+  <svg
+    width={width}
+    height={height}
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M18 6L6 18"
+      stroke="#2e2e2e"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></path>
+    <path
+      d="M6 6L18 18"
+      stroke="#2e2e2e"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></path>
+  </svg>
+);
 function App() {
   const [questions, setQuestions] = useState(mixedData(data));
   const [dataSearch, setDataSearch] = useState(questions);
@@ -76,6 +101,9 @@ function App() {
       setDataSearch(listNew);
     }
   };
+  useEffect(() => {
+    !search && setDataSearch(questions);
+  }, [search]);
   return (
     <div className="Container">
       <div className="titleApp">Bài thi thử kỹ năng làm việc</div>
@@ -93,21 +121,41 @@ function App() {
               : "Bấm submit rồi hẳn search nhé mấy huynh đài"
           }
         />
+        <div
+          onClick={() => setSearch("")}
+          className={`close ${search && "active"}`}
+        >
+          <CloseIcon className="closeIcon" />
+        </div>
       </div>
       <div className="Question" ref={questionRef}>
-        {dataSearch.map((answer, index) => (
-          <div key={answer.id} className="item">
-            <h3 className="title">
-              <strong>Câu {index + 1}:</strong> {answer.title}
-            </h3>
-            <Item
-              key={answer.id}
-              questionID={answer.id}
-              data={answer.answers}
-              submitted={submitted}
-            />
+        {dataSearch.length > 0 ? (
+          dataSearch.map((answer, index) => (
+            <div key={answer.id} className="item">
+              <h3 className="title">
+                <strong>Câu {index + 1}:</strong> {answer.title}
+              </h3>
+              <Item
+                key={answer.id}
+                questionID={answer.id}
+                data={answer.answers}
+                submitted={submitted}
+              />
+            </div>
+          ))
+        ) : (
+          <div
+            style={{
+              fontSize: 40,
+              textAlign: "center",
+              margin: "20px 0",
+              color: "red",
+              fontWeight: "bold",
+            }}
+          >
+            Search sai rồi cha nậu !
           </div>
-        ))}
+        )}
       </div>
       <button onClick={handleSubmit} className="btnSubmit">
         {submitted ? "Làm lại" : "Submit"}
