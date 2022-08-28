@@ -75,7 +75,7 @@ const CloseIcon = ({ width = "2rem", height = "2rem", className }) => (
 );
 function App() {
   const [questions, setQuestions] = useState(mixedData(data));
-  const [dataSearch, setDataSearch] = useState(questions);
+  const [dataSearch, setDataSearch] = useState(mixedData(data));
   const [submitted, setSubmitted] = useState(false);
   const [search, setSearch] = useState("");
   const questionRef = useRef();
@@ -84,9 +84,8 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const handleSubmit = () => {
-    submitted &&
-      setQuestions(mixedData(questions)) &&
-      setDataSearch(mixedData(questions));
+    submitted && setQuestions(mixedData(questions));
+    submitted && setDataSearch(mixedData(questions));
     submitted && scrollTop();
     setSubmitted(!submitted);
   };
