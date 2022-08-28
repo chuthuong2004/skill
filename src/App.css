@@ -147,6 +147,7 @@ input:checked ~ label{
 .search input {
   flex: 1;
   padding: 20px;
+  padding-right: 50px;
   font-size: 20px;
 }
 .search .close{
