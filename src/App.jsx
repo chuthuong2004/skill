@@ -54,7 +54,11 @@ function App() {
           type="text"
           value={search}
           onChange={(e) => handleSearchChange(e)}
-          placeholder="Bấm submit rồi hẳn search nhé mấy huynh đài"
+          placeholder={
+            submitted
+              ? "Rồi hãy bắt đầu search đi nào !"
+              : "Bấm submit rồi hẳn search nhé mấy huynh đài"
+          }
         />
       </div>
       <div className="Question" ref={questionRef}>
